@@ -31,7 +31,7 @@ Available kernels:
 ```
 
 - Install the latest version of .net try 
-  - dotnet tool install dotnet-try -g
+```dotnet tool install dotnet-try -g```
 
 - finally install the .net kernel for jupyter with the command: 
 ```dotnet try jupyter install```
@@ -41,7 +41,7 @@ Available kernels:
 ![img3](img/jupyter_kernels.png)
 
 # launch jupyter notebook
-
+In the command line, type: 
 ```jupyter notebook```
 
 A browser window should open and the terminal should display: 
@@ -64,6 +64,8 @@ C:\Repos\noteb>jupyter notebook
 [I 22:15:16.852 NotebookApp] Kernel started: be6910a0-92f0-4ec0-a26c-d8274b44cd6d
 ```
 
+The main page of the Jupyter notebook allows you to see the notebooks available in the folder and to create new ones. 
+
 ![img4](img/jupyter_create_csharp.png)
 
 # Hello world 
@@ -80,17 +82,7 @@ in the second cell. Executing it shows us that the C# Kernel is working.
 
 ![imgHello](img/jupyter_hello_world_csharp.png)
 
-
-# Writing a first linear program in the jupyter notebook with jupyter and Google.OrTools
-
-## Importing Nuget packages in Jupyter notebook 
-
 ```#r``` is used to reference a dll or a nuget package. If you prefix the command with "nuget:" then the jupyter notebook will download the nuget and add it as a reference. Then as in usual c#, you must reference it. 
-
-```csharp
-#r "nuget:Google.OrTools"
-using Google.OrTools.LinearSolver;
-```
 
 # Installing an R kernel for jupyter notebook
 
