@@ -16,7 +16,7 @@ Right click on python and follow the Open File Location until you find the place
   - ```C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\```
   - ```C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python37_64\Scripts```
 
-- install jupyter using pip which was installed with visual studio, make sure to run in an administrator shell
+- install jupyter using pip which was installed with visual studio, make sure to run in an **administrator** shell
   - ```pip install jupyter```
 
 - check that jupyter now starts
@@ -28,15 +28,10 @@ Right click on python and follow the Open File Location until you find the place
 ```
 Available kernels:
   c:\program files (x86)\microsoft visual studio\shared\python37_64\share\jupyter\kernels\python3  
-````
+```
 
-- Install the latest version of .net try from the repository 
-  - (optional) uninstall previous dotnet-try version
-
-    ```dotnet tool uninstall -g dotnet-try```
-
-  - install new dotnet try version directly from the feed of the repository 
-  ```dotnet tool install -g --add-source "https://dotnet.myget.org/F/dotnet-try/api/v3/index.json" dotnet-try```
+- Install the latest version of .net try 
+  - dotnet tool install dotnet-try -g
 
 - finally install the .net kernel for jupyter with the command: 
 ```dotnet try jupyter install```
@@ -62,7 +57,7 @@ C:\Repos\noteb>jupyter notebook
 [I 22:14:55.629 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).  [C 22:14:55.737 NotebookApp]
 
     To access the notebook, open this file in a browser:
-        file:///C:/Users/erici/AppData/Roaming/jupyter/runtime/nbserver-17608-open.html
+        file:///C:/Users/xxxxxx/AppData/Roaming/jupyter/runtime/nbserver-17608-open.html
     Or copy and paste one of these URLs:
         http://localhost:8888/?token=XXXXXXXXXXXXXXXXXXXc1ee1dfccc0a6624263d584b8ca4c
      or http://127.0.0.1:8888/?token=XXXXXXXXXXXXXXXXXXXc1ee1dfccc0a6624263d584b8ca4c
@@ -73,6 +68,17 @@ C:\Repos\noteb>jupyter notebook
 
 # Hello world 
 
+Create a new C# notebook. Then type
+```CSharp
+using System; 
+```
+in the first cell. I executed it and then typed: 
+```CSharp
+Console.WriteLine("Hello World"); 
+```
+in the second cell. Executing it shows us that the C# Kernel is working.
+
+![imgHello](img/jupyter_hello_world_csharp.png)
 
 
 # Writing a first linear program in the jupyter notebook with jupyter and Google.OrTools
@@ -88,7 +94,17 @@ using Google.OrTools.LinearSolver;
 
 # Installing an R kernel for jupyter notebook
 
-I have R installed with visual studio, so I launched visual studio, went to the R Tools menu at the top and selected "R Interactive". From the command line of R, I typed in the following commands. [Installation guide R](https://irkernel.github.io/installation/)
+To install R Tools for Visual Studio, install the Visual Studio Extension R Tools for Visual Studio 2019, which was in preview when I looked. Once this is installed, you must install the Microsoft R client. This option will be presented if you go to the "R Interactive" window. 
+
+![img5](img/install_R_vs.png)
+
+I have R installed with visual studio, so I launched visual studio in **admin mode** to be able to have my R directory writable, went to the R Tools menu at the top and selected "R Interactive". 
+
+![img6](img/r_interactive_vs.png)
+
+From the command line of R, I typed in the following commands. [Installation guide R](https://irkernel.github.io/installation/)
+
+![img6](img/r_interactive_kernel_install.png)
 
 ```
 install.packages('IRkernel')
@@ -102,6 +118,12 @@ Available kernels:
   ir             C:\ProgramData\jupyter\kernels\ir
 ```
 
-## Use R to show a plot 
+## Use R to show a some math
 
+Create a new R notebook and type in the first cell: 
+```R
 demo(plotmath)
+```
+Executing this should show you the following long list of tables with mathematical symbols. 
+
+![img7](img/jupyter_R.png)
