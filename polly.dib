@@ -1,0 +1,20 @@
+#!csharp
+
+#r "nuget: Polly, 7.2.3"
+using Polly;
+using System.IO; 
+
+#!csharp
+
+string filename = @"C:\tmp\in.txt";
+
+var fileRetryPolicy = Polly.Policy.Handle<System.IO.FileNotFoundException>().WaitAndRetry(5, retryAttempt => {Console.WriteLine("retry " + retryAttempt); return TimeSpan.FromSeconds((Math.Pow(2, retryAttempt))); });
+
+// Writing to file with a retry that fails and is not handled if the file is readonly because the policy does not handle System.UnauthorizedAccessException
+// fileRetryPolicy.Execute(() => File.AppendAllText(filename, DateTime.UtcNow.ToString() + Environment.NewLine)); 
+
+string contents = fileRetryPolicy.Execute<string>(() => { return File.ReadAllText(filename);});
+Console.WriteLine(contents);
+
+var fileUnauthorizedPolicy = Polly.Policy.Handle<System.UnauthorizedAccessException>().Fallback( () => Console.WriteLine("File is locked readonly"));
+fileUnauthorizedPolicy.Execute(() => File.AppendAllText(filename, DateTime.UtcNow.ToString() + Environment.NewLine)); 
