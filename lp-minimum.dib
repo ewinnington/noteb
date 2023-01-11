@@ -1,0 +1,49 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"httpRequest","languageName":"http"},{"name":"value"}]}}
+
+#!csharp
+
+#r "nuget: Google.OrTools, 9.5.2237"
+
+using Google.OrTools.LinearSolver;
+
+#!csharp
+
+Solver solver = Solver.CreateSolver("CBC");
+if (solver is null)
+{
+    Console.WriteLine("Unable to init kernel");
+    return;
+}
+
+#!csharp
+
+Variable x = solver.MakeNumVar(0.0, double.PositiveInfinity, "x");
+Variable y = solver.MakeNumVar(0.0, double.PositiveInfinity, "y");
+
+Console.WriteLine("Number of variables = " + solver.NumVariables());
+
+#!csharp
+
+solver.Add(x + 2 * y <= 14.0);
+
+solver.Add(3 * x - y >= 0.0);
+
+solver.Add(x - y <= 2.0);
+Console.WriteLine("Number of constraints = " + solver.NumConstraints());
+
+solver.Maximize(3 * x + 4 * y);
+
+#!csharp
+
+Solver.ResultStatus resultStatus = solver.Solve();
+if (resultStatus != Solver.ResultStatus.OPTIMAL)
+{
+Console.WriteLine("The problem does not have an optimal solution!");
+return;
+}
+Console.WriteLine("Solution:");
+Console.WriteLine("Objective value = " + solver.Objective().Value());
+Console.WriteLine("x = " + x.SolutionValue());
+Console.WriteLine("y = " + y.SolutionValue());
